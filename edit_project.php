@@ -261,6 +261,7 @@ PRINT <<< END
 	context.font="15px Arial";
 	context.fillText("$con_desc",$start_point,$canvas_text);
 	context.stroke();
+// print horizontal lines after each task on html canvas
 </script>
 END;
 
