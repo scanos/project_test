@@ -127,7 +127,19 @@ END;
 
 //$max_sql ="SELECT MAX(due_date) as maxdays FROM '".$tasks_table."' WHERE  project_id = :project_id";
 //echo "<li>".$max_sql." "; 
+echo "<p> EDIT TASKS  ";
+$stmt = $pdo->prepare('SELECT id FROM '.$tasks_table.'  WHERE  project_id = :project_id');
 
+                $stmt->bindParam(':project_id', $id, PDO::PARAM_INT);
+                $stmt->execute();
+
+
+                while ($row = $stmt->fetch())
+                        {
+
+                        echo "<a href=edit_task.php?id=".$row['id'].">";
+                        echo $row['id']."</a>  ";
+                        }
 
 
 
