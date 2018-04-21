@@ -28,6 +28,7 @@ $projects_table = "projects";
 //session_start();
 
 echo "<p>".$_SESSION['user']."  <a href=index.php?logout=true>logout</a>";
-echo "   <a href=show_table.php>Show Tables</a>   <a href=display_tasks.php>Home</a>";
+echo "   <a href=show_table.php>Show Tables</a>   <a href=display_tasks.php>Home</a>  <a href=task_list.php>tasks documentor</a>";
+
 
 ?>
