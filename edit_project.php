@@ -128,6 +128,7 @@ END;
 //$max_sql ="SELECT MAX(due_date) as maxdays FROM '".$tasks_table."' WHERE  project_id = :project_id";
 //echo "<li>".$max_sql." "; 
 echo "<p> EDIT TASKS  ";
+$count_tasks=0;
 $stmt = $pdo->prepare('SELECT id FROM '.$tasks_table.'  WHERE  project_id = :project_id');
 
                 $stmt->bindParam(':project_id', $id, PDO::PARAM_INT);
@@ -139,12 +140,15 @@ $stmt = $pdo->prepare('SELECT id FROM '.$tasks_table.'  WHERE  project_id = :pro
 
                         echo "<a href=edit_task.php?id=".$row['id'].">";
                         echo $row['id']."</a>  ";
+			 $count_tasks+=1;
+
                         }
 
+$canvas_height = $count_tasks * 50;
 
 
 
-$stmt = $pdo->prepare('SELECT MAX(start_date) as maxdays FROM '.$tasks_table.'  WHERE  project_id = :project_id');
+$stmt = $pdo->prepare('SELECT MAX(due_date) as maxdays FROM '.$tasks_table.'  WHERE  project_id = :project_id');
 //$stmt = $pdo->prepare($max_sql);
                 $stmt->bindParam(':project_id', $id, PDO::PARAM_INT);
                 $stmt->execute();
@@ -219,7 +223,7 @@ description,status,resolution FROM '.$tasks_table.'  WHERE  project_id = :projec
                 $stmt->execute();
 
 
-echo "<canvas id='mycanvas' width='$canvas_length' height='400' style='border:1px solid #d3d3d3;'>";
+echo "<canvas id='mycanvas' width='$canvas_length' height='$canvas_height'  style='border:1px solid #d3d3d3;'>";
 echo"Your browser does not support the HTML5 canvas tag.</canvas>";
 
 
