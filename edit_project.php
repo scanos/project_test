@@ -186,8 +186,11 @@ $end      = new DateTime($maxdays);
 $end->modify('first day of next month');
 $interval = DateInterval::createFromDateString('1 month');
 $period   = new DatePeriod($start, $interval, $end);
-$month_stack = array();
+
+$month_stack = array("0");
 $month_stack_name = array();
+
+//ceate an array of co-ordinates based on months
 
 foreach ($period as $dt) {
    // echo "  <li>dt ". $dt->format("Y-m-d");
@@ -202,6 +205,7 @@ $temp_date_str1=$dt->format("M")." ".$dt->format("y");
 array_push($month_stack_name,$temp_date_str1 );
 
 			}
+//ceate an array of co-ordinates based on months
 
 //print_r($month_stack_name);
 $removedM = array_shift($month_stack);
@@ -303,16 +307,24 @@ $sm_x=0;
 echo "<script>";
 foreach ($month_stack as $value) {
 
-        $temo_mon_x = $month_stack_name[$sm_x+1];
-        $v = $value * ($canvas_length/$temp_interval);
+	
+        $temo_mon_x = $month_stack_name[$sm_x];
+        $v = ($month_stack[$sm_x]*$canvas_length/$temp_interval);
+        if($sm_x==0){$add_interval=0;$v=0;
 
+                        }else{  $add_interval=60;
+                                $v = ($month_stack[$sm_x]*$canvas_length/$temp_interval);}
+
+	
+	
+	
 PRINT <<< END
         context.beginPath();
         context.moveTo($v,0);
         context.lineWidth=3;
         context.strokeStyle= "black";
         context.font="15px Arial";
-        context.fillText("$temo_mon_x",$v+60,10);
+        context.fillText("$temo_mon_x",$v+$add_interval,10);
         context.lineTo($v, 800);
         context.stroke();
 END;
