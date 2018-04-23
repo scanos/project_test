@@ -265,7 +265,29 @@ PRINT <<< END
 	context.font="15px Arial";
 	context.fillText("$con_desc",$start_point,$canvas_text);
 	context.stroke();
+
+// print circle in middle of task
+context.beginPath();
+context.lineWidth=1;
+context.arc($mid_point,$canvas_y,10,0,2*Math.PI);
+context.stroke();
+// print circle in middle of task
+
 // print horizontal lines after each task on html canvas
+context.beginPath();
+context.lineWidth=1;
+context.strokeStyle= "black";
+context.moveTo(0,$canvas_y+10);
+context.lineTo(1200,$canvas_y+10);
+context.stroke();
+// print horizontal lines after each task on html canvas
+
+
+
+
+
+
+
 </script>
 END;
 
