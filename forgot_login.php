@@ -264,7 +264,7 @@ exit;
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Coding Cage - Login & Registration System</title>
+<title>Project App</title>
 <link rel="stylesheet" href="assets/css/bootstrap.min.css" type="text/css"  />
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -315,7 +315,7 @@ exit;
             </div>
             
             <div class="form-group">
-             <button type="submit" class="btn btn-block btn-primary" name="btn-signup">Sign Up</button>
+             <button type="submit" class="btn btn-block btn-primary" name="btn-signup">Send</button>
             </div>
             
             <div class="form-group">
@@ -323,7 +323,7 @@ exit;
             </div>
             
             <div class="form-group">
-             <a href="index1.php">Sign in Here...</a>
+             <a href="index.php">Sign in Here...</a>
             </div>
         
         </div>
