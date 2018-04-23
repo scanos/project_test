@@ -247,7 +247,10 @@ while ($row = $stmt->fetch())
 	$start_point= date_diff($datetime1, $temp_date);
 	$start_point =intval(($start_point->format('%a')) * $canvas_length/$temp_interval);
 	$no_of_days=$row['no_of_days']*($canvas_length/$temp_interval);
-	$end_point=$start_point+$no_of_days;
+	$end_point=$start_point+$no_of_days; 
+	$mid_point = $end_point-(($end_point-$start_point)/2);
+
+	
 	if($row['status'] == 1){$status_color = 'GREEN';} else {$status_color='RED';}	
 
 
