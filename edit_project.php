@@ -115,10 +115,11 @@ if ($status=="CLOSED"){echo "checked";}
 
 PRINT <<< END
 
-><label for="status">Task Completed</label>
+><label for="status">Project Completed</label>
   </div>
   <div>
 END;
+
 
 
                                 echo"<div class='form-group'> <button type='submit' class='btn btn-block btn-primary' name='btn-signup'";
@@ -162,24 +163,27 @@ $stmt = $pdo->prepare('SELECT MIN(start_date) as mindays FROM '.$tasks_table.'  
 
 $mindays = $stmt->fetchColumn();
 
+
+
 $datetime1 = date_create($mindays);
 $datetime2 = date_create($maxdays);
-//echo "<li>  ".$mindays." ". $maxdays;
 $interval = date_diff($datetime1, $datetime2);
-//$interval = date_diff($mindays, $maxdays);
-//echo $interval->format('%R%a days');
-//echo "<li>max ".$maxdays." min ".$mindays."<p>";
+$temp_interval = intval($interval->format('%a')) + 0 ;
+// number of days as an integer
+//echo "<li> no of days ".$temp_interval ;
+
+//for printing out project time line
+$stmt = $pdo->prepare('SELECT DATEDIFF (due_date,start_date) as project_diff FROM '.$projects_table.'  WHERE  id = :project_id');
+                $stmt->bindParam(':project_id', $id, PDO::PARAM_INT);
+                $stmt->execute();
+
+$project_interval = $stmt->fetchColumn();
+if ($project_interval <=0){echo" <h1>issues with project dates";}
+//for printing out project time line
 
 
-        //$interval = date_diff($datetime1, $datetime2);
-        $temp_interval = intval($interval->format('%a')) + 0 ;
         $canvas_length= (1200/(intval($temp_interval)+0));
         $canvas_length = $canvas_length*(intval($temp_interval));
-
-
-
-
-
 $start    = new DateTime($mindays);
 $start->modify('first day of this month');
 $end      = new DateTime($maxdays);
@@ -288,6 +292,21 @@ context.moveTo(0,$canvas_y+10);
 context.lineTo(1200,$canvas_y+10);
 context.stroke();
 // print horizontal lines after each task on html canvas
+
+
+//print project time_line
+context.beginPath();
+context.lineWidth=4;
+context.strokeStyle= "blue";
+context.moveTo(0,$canvas_height-15);
+context.lineTo($project_interval*($canvas_length/$temp_interval),$canvas_height-15);
+
+context.font="20px Arial";
+context.fillstyle="blue";
+context.fillText("project",$project_interval*($canvas_length/$temp_interval)+10,$canvas_height-15);
+
+context.stroke();
+//print project time_line
 
 
 
