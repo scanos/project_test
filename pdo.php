@@ -1,12 +1,18 @@
+
 <?php
-// pdo.php - held outside the web root - 2 levels above this directory
+// pdo.php - should be stored 2 levels above apps folder e.g. place in /var if apps in /var/www/html
 ob_start();
 session_start();
 
+$_SESSION['ops_permit'] = '126734569C23r45rre';
+// used to ensure that form ops are not open to database injection
+
+
+
 $host = 'localhost';
 $db   = 'projects';
-$user = '';
-$pass = '';
+$user = 'root';
+$pass = '92Dufferin#';
 $charset = 'utf8mb4';
 
 $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
@@ -29,6 +35,10 @@ $projects_table = "projects";
 
 echo "<p>".$_SESSION['user']."  <a href=index.php?logout=true>logout</a>";
 echo "   <a href=show_table.php>Show Tables</a>   <a href=display_tasks.php>Home</a>  <a href=task_list.php>tasks documentor</a>";
-
+echo "<p><font color='green'>".$_SESSION['notification']."</font>";
+// notification codes
+//ERROR 101 INVALID ADDITION OPERATION
 
 ?>
+
+
