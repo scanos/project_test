@@ -15,7 +15,7 @@ $_SESSION['sensor']=$sensor_id;
 require "../../pdo2.php";
 require "../../todocss.php";
 
-$myquery="select * from todo where id = '".$todo_id."';";
+$myquery="select * from todo_orders where id = '".$todo_id."';";
 $stmt = $pdo->query($myquery);
 
                 $stmt->execute();
@@ -30,9 +30,9 @@ $stmt = $pdo->query($myquery);
 			$responsible= $row['responsible'];
                         $duedate= $row['duedate'];
                         $status= $row['status'];
-                        $risk= $row['risk'];
+                        $progress= $row['progress'];
 //echo "$risk is $risk";
-if ($risk = 'low') {$lowselected = 'selected';} else {$highselected = 'selected';}
+//if ($risk = 'low') {$lowselected = 'selected';} else {$highselected = 'selected';}
 			//$email= $mainArray['email'];
 			//$acknowledged= $mainArray['acknowledged'];
 //echo "<li>".$notes;
@@ -73,11 +73,29 @@ $action
 </div>
 
 
+<label for="progress">Order Status:</label>
+<select id="progress" name="progress">
+END;
 
-<label for="risk">Risk Status:</label>
-<select id="risk" name="risk">
-  <option value="big" $highselected>big</option>
-  <option value="low" $lowselected>low</option>
+
+
+$id_text_query = "select description as order_status from projects.order_status;";
+$stmt2 = $pdo->query($id_text_query);
+                $stmt2->execute();
+                while ($row = $stmt2->fetch())
+                        {
+                       
+                        $order_status=$row[order_status];
+                        echo "<option value='".$order_status."' ";
+                        if ($order_status == $progress) 
+                        {echo "selected";}
+                        echo ">".$order_status."</option>"; 
+                        }
+
+
+
+print <<<END
+
 </select>
 
 

@@ -1,30 +1,23 @@
 <?php 
 require "../../pdo2.php";
 require "../../todocss.php";
-session_start();
-echo "project ".$_SESSION['pid'];
-$mquery="SELECT description FROM projects.projects where id = '".$_SESSION['pid']."'";
+//session_start();
+//echo "project ".$_SESSION['pid'];
+//$mquery="SELECT description FROM projects.projects where id = '".$_SESSION['pid']."'";
 //echo $mquery;
-$stmt3 = $pdo->query("$mquery");
-$stmt3->execute();
-$row = $stmt3->fetch(PDO::FETCH_ASSOC);
-echo " Project Description".$row['description'];
+//$stmt3 = $pdo->query("$mquery");
+//$stmt3->execute();
+//$row = $stmt3->fetch(PDO::FETCH_ASSOC);
+//echo " Project Description".$row['description'];
 
 
-
-
-
-
-
-
-
-echo "<p><a href=insert_todo_form.php>Add Record</a>";
+//echo "<p><a href=insert_todo_form.php>Add Record</a>";
 
 echo "<form action='' method='POST'> ";
 echo "<label class='heading'>UnActioned:</label>";
 echo "<input type='checkbox' onclick='toggle(this);' />Check all?<br />";
 //$id_text_query = "select id,description,responsible,action,reg_date,status from projects.todo where status = 0;";
-$id_text_query = "select id,risk,description,responsible,action,duedate,DATEDIFF(NOW(),duedate) as tdays,reg_date,status,cost from projects.todo where status=0;";
+$id_text_query = "select id,risk,description,responsible,action,duedate,DATEDIFF(NOW(),duedate) as tdays,reg_date,status,cost from projects.todo_orders;";
 $inner_counter=0;
 $stmt = $pdo->query($id_text_query);
                 $stmt->execute();
@@ -59,7 +52,7 @@ else
 {
 $risktext= "";
 }
-echo "<font color='$tfont'>$risktext<a href=todo_edit.php?todo_id=$id>$id</a></b> Select <input type='checkbox' name='lang[]' value='$inner_counter' ><input type='hidden' id='$id' name='id[]' value='$id'>
+echo "<font color='$tfont'>$risktext<a href=order_edit.php?todo_id=$id>$id</a></b> Select <input type='checkbox' name='lang[]' value='$inner_counter' ><input type='hidden' id='$id' name='id[]' value='$id'>
 description <input type ='text' name='description[]' value='$description' size='30'>  
 Notes <input type='text' id='$action' name='langtext[]' value='$action' size='60'> Cost:<input type ='text' name='cost[]' value='$cost' size='5'> 
 DueDate: $duedate</font>";

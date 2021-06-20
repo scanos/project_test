@@ -1,9 +1,9 @@
 <?php 
 require "../../pdo2.php";
-require "../../bootstrap.php";
+require "../../todocss.php";
 
 
-echo "<meta http-equiv=\"refresh\" content=\"5; URL='index.php'\" />";
+echo "<meta http-equiv=\"refresh\" content=\"10; URL='index.php'\" />";
 if (!empty($_POST))
 {
     $description=$_POST['description'];
@@ -13,10 +13,11 @@ if (!empty($_POST))
     $cost=$_POST['cost'];
     $action=$_POST['action'];
     $status=$_POST['status'];
+    $progress=$_POST['progress'];
 
 
-    echo  "<p>status $status id $id cost $cost duedate $duedate description $description responsible $responsible";
- $id_text_query = "update projects.todo set status='$status',action='$action',duedate='$duedate',responsible='$responsible',description='$description',cost='$cost' where id = '$id';";
+    echo  "<p>risk $risk status $status id $id cost $cost duedate $duedate description $description responsible $responsible";
+ $id_text_query = "update projects.todo_orders set progress='$progress',status='$status',action='$action',duedate='$duedate',responsible='$responsible',description='$description',cost='$cost' where id = '$id';";
            
             echo "<p> ".$id_text_query;
             $stmt2 = $pdo->query($id_text_query);
