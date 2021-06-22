@@ -1,10 +1,6 @@
 <?php
-//$sensor_id  =  $_GET["sensor_id"];
-//$clientid = $_GET["clientid"];
-
 
 session_start();
-//$c_sensor = $_SESSION['sensor'];
 $todo_id =  $_GET["todo_id"];
 if (strlen($sensor_id)<1){$sensor_id =$c_sensor;}
 else
@@ -12,7 +8,7 @@ else
 $_SESSION['sensor']=$sensor_id;
 }
 
-require "../../pdo2.php";
+require "../../pdotodo.php";
 require "../../todocss.php";
 
 $myquery="select * from todo where id = '".$todo_id."';";
@@ -31,6 +27,10 @@ $stmt = $pdo->query($myquery);
                         $duedate= $row['duedate'];
                         $status= $row['status'];
                         $risk= $row['risk'];
+                        $start_date= $row['start_date'];
+                        $no_of_days= $row['no_of_days'];
+
+
 //echo "$risk is $risk";
 if ($risk = 'low') {$lowselected = 'selected';} else {$highselected = 'selected';}
 			//$email= $mainArray['email'];
@@ -67,10 +67,23 @@ $action
 </fieldset>
 
 
-<div class='form-group'>
-<label for='datepicker'>Due Date:</label>
-<input class='form-control' type='text' placeholder='Enter Due Date' value='$duedate' name='datepicker' id='datepicker' />
-</div>
+<fieldset>
+<legend><span class="number">3</span>Start Date</legend>
+<input type="text" name="datepicker" id="datepicker" value="$start_date">
+</fieldset>
+
+<fieldset>
+<legend><span class="number">4</span>Duration of task(d) </legend>
+<input type="text" name="no_of_days" id="no_of_days" value="$no_of_days" size="3">
+</fieldset>
+
+
+
+
+<fieldset>
+<legend><span class="number">3</span>Due Date</legend>
+$duedate
+</fieldset>
 
 
 

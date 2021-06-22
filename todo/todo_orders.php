@@ -1,23 +1,11 @@
 <?php 
-require "../../pdo2.php";
+require "../../pdotodo.php";
 require "../../todocss.php";
-//session_start();
-//echo "project ".$_SESSION['pid'];
-//$mquery="SELECT description FROM projects.projects where id = '".$_SESSION['pid']."'";
-//echo $mquery;
-//$stmt3 = $pdo->query("$mquery");
-//$stmt3->execute();
-//$row = $stmt3->fetch(PDO::FETCH_ASSOC);
-//echo " Project Description".$row['description'];
-
-
-//echo "<p><a href=insert_todo_form.php>Add Record</a>";
 
 echo "<form action='' method='POST'> ";
 echo "<label class='heading'>UnActioned:</label>";
 echo "<input type='checkbox' onclick='toggle(this);' />Check all?<br />";
-//$id_text_query = "select id,description,responsible,action,reg_date,status from projects.todo where status = 0;";
-$id_text_query = "select id,risk,description,responsible,action,duedate,DATEDIFF(NOW(),duedate) as tdays,reg_date,status,cost from projects.todo_orders;";
+$id_text_query = "select id,risk,description,responsible,action,duedate,DATEDIFF(NOW(),duedate) as tdays,reg_date,status,cost from todo_orders;";
 $inner_counter=0;
 $stmt = $pdo->query($id_text_query);
                 $stmt->execute();
@@ -32,15 +20,6 @@ $stmt = $pdo->query($id_text_query);
                          $duedate=$row['duedate'];
                          $tdays=$row['tdays'];
                          $risk=$row['risk'];
-
-			 //if ($status == 1)
-                        //{
-                         //$checked = "checked";
-                        //}
-                        //else
-                        //{
-                         //$checked = "";
-                        //}
 
 echo "<p><b>";
 $tfont="";
@@ -76,11 +55,11 @@ echo "  <p><input type='submit' value='Submit' name='submit'>";
 //var_dump($_POST['lang']);
 //var_dump($_POST['cost']);
 
-$stmt3 = $pdo->query('SELECT SUM(cost) AS value_sum FROM projects.todo');
+$stmt3 = $pdo->query('SELECT SUM(cost) AS value_sum FROM todo_orders');
 $stmt3->execute();
 $row = $stmt3->fetch(PDO::FETCH_ASSOC);
 
-echo "<li> total costs".$row['value_sum'];
+echo "<li> total order costs ".$row['value_sum'];
 
 
 
@@ -97,7 +76,7 @@ if(isset($_POST['submit']))
             $action=$_POST['langtext'][$value];
             $description=$_POST['description'][$value];
             $cost=$_POST['cost'][$value];
-   	    $id_text_query = "update projects.todo set action = '$action',description='$description',cost='$cost' where id = '$id';";
+   	    $id_text_query = "update todo set action = '$action',description='$description',cost='$cost' where id = '$id';";
             echo "<p> ".$id_text_query;
             $stmt2 = $pdo->query($id_text_query);
             $stmt2->execute();

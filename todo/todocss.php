@@ -68,6 +68,15 @@ $(function () {
             $("#datepicker").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true });
         });
   </script>
+
+
+<script>
+$(function () {
+            $("#datepicker1").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true });
+        });
+  </script>
+
+
 </head>
 <body>
 
@@ -87,9 +96,16 @@ $(function () {
 
 
     <li class="nav-item">
-      <a class="nav-link" href="sensor_summary.php">Add Project</a>
+      <a class="nav-link" href="insert_project_form.php">Add Project</a>
     </li>
 
+    <li class="nav-item">
+      <a class="nav-link" href="current_tasks.php">Current Tasks</a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="project_chart.php">Project Chart</a>
+    </li>
 
     <li class="nav-item">
       <a class="nav-link" href="todo_orders.php">View Orders</a>

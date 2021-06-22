@@ -1,5 +1,5 @@
 <?php 
-require "../../pdo2.php";
+require "../../pdotodo.php";
 require "../../todocss.php";
 
 
@@ -15,8 +15,10 @@ if (!empty($_POST))
     //echo "<p>$insert_query";
     $description=$_POST['insert_description'];
     $responsible=$_POST['insert_responsible'];
+    $pid=$_POST['pid'];
+
     echo  "<p>$description $responsible";
-    $stmt = $pdo->query("insert into projects.todo (description,responsible) values ('$description','$responsible')");
+    $stmt = $pdo->query("insert into todo (description,responsible,pid) values ('$description','$responsible','$pid')");
     $stmt->execute();
     //$stmt = $pdo->query('select description,sdate,id_text,scount,smax,smin,savg,notes from summary_sensors');
    // $stmt->close();

@@ -1,7 +1,5 @@
 <?php 
-require "../../pdo2.php";
-//require "../../bootstrap.php";
-//echo "<meta http-equiv=\"refresh\" content=\"0; URL='index.php'\" />";
+require "../../pdotodo.php";
 require "../../todocss.php";
 
 
